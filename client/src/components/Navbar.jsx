@@ -39,7 +39,7 @@ const Navbar = ({ landingPage = false }) => {
                   Home
                 </Link>
                 <Link to="/scan" className="px-3 py-2 text-sm font-medium text-white hover:text-gray-200 transition-colors duration-200">
-                  Scan
+                  Upload
                 </Link>
               </>
             )}

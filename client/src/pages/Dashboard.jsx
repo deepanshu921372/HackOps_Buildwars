@@ -134,10 +134,10 @@ const Dashboard = () => {
                     <Upload className="text-green-600 mb-2" size={32} />
                     <span className="text-sm text-gray-700">Upload Item</span>
                   </Link>
-                  <button className="bg-blue-50 hover:bg-blue-100 rounded-lg p-4 flex flex-col items-center justify-center transition">
+                  <Link to="/map" className="bg-blue-50 hover:bg-blue-100 rounded-lg p-4 flex flex-col items-center justify-center transition">
                     <MapPin className="text-blue-600 mb-2" size={32} />
                     <span className="text-sm text-gray-700">Find Centers</span>
-                  </button>
+                  </Link>
                   <button className="bg-purple-50 hover:bg-purple-100 rounded-lg p-4 flex flex-col items-center justify-center transition">
                     <PlusCircle className="text-purple-600 mb-2" size={32} />
                     <span className="text-sm text-gray-700">DIY Ideas</span>

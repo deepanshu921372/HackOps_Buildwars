@@ -92,13 +92,62 @@ const Scan = () => {
   
   // Helper function to prepare image for the model
   const prepareImageForModel = async (imageData) => {
-    // This is a placeholder - implement according to your model's requirements
-    // You'll need to:
-    // 1. Resize the image
-    // 2. Normalize the pixels
-    // 3. Convert to tensor
-    // Return the prepared tensor
-    return null; // Replace with actual implementation
+    try {
+      // Create an HTML image element from the data URL
+      const img = new Image();
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = imageData;
+      });
+
+      // Create a canvas to resize and process the image
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Set canvas size to model input size (640x640)
+      const modelWidth = 640;
+      const modelHeight = 640;
+      canvas.width = modelWidth;
+      canvas.height = modelHeight;
+
+      // Draw and resize image to canvas
+      // Use drawImage with 9 arguments to control scaling and positioning
+      ctx.drawImage(
+        img, 
+        0, 0, img.width, img.height,  // Source rectangle
+        0, 0, modelWidth, modelHeight // Destination rectangle
+      );
+      
+      // Get image data from canvas
+      const canvasImageData = ctx.getImageData(0, 0, modelWidth, modelHeight);
+      const data = canvasImageData.data;
+
+      // Prepare the input tensor
+      const inputArray = new Float32Array(modelWidth * modelHeight * 3);
+      
+      // Convert image data to normalized float32 array
+      for (let i = 0; i < data.length; i += 4) {
+        // Normalize RGB values with ImageNet normalization
+        // Mean: [0.485, 0.456, 0.406]
+        // Std: [0.229, 0.224, 0.225]
+        inputArray[i/4*3] = (data[i] / 255.0 - 0.485) / 0.229;     // R
+        inputArray[i/4*3+1] = (data[i+1] / 255.0 - 0.456) / 0.224; // G
+        inputArray[i/4*3+2] = (data[i+2] / 255.0 - 0.406) / 0.225; // B
+      }
+
+      // Create tensor with appropriate shape for your model
+      const tensor = new ort.Tensor(
+        'float32',
+        inputArray,
+        [1, 3, modelHeight, modelWidth]
+      );
+
+      return tensor;
+    } catch (error) {
+      console.error('Error preparing image:', error);
+      throw new Error(`Failed to prepare image: ${error.message}`);
+    }
   };
   
   // Helper function to process model results

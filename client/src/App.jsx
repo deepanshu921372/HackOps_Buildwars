@@ -10,7 +10,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Scan from './pages/Scan';
 import About from './pages/About';
-
+import Map from './components/Map';
 // Components
 import ChatBot from './components/ChatBot';
 import PrivateRoute from './components/PrivateRoute';
@@ -37,10 +37,11 @@ function App() {
         {/* Protected routes */}
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/scan" element={<PrivateRoute><Scan /></PrivateRoute>} />
+        <Route path="/map" element={<PrivateRoute><Map /></PrivateRoute>} />
       </Routes>
       
       {/* ChatBot is available on all pages */}
-      <ChatBot />
+      {/* <ChatBot /> */}
     </>
   );
 }
