@@ -15,7 +15,7 @@ const Navbar = ({ landingPage = false }) => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-green-400 to-blue-500 shadow-md transition-all duration-300 ease-in-out">
+    <nav className="bg-gradient-to-r from-green-400 to-green-800 shadow-md transition-all duration-300 ease-in-out">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
