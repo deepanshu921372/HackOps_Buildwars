@@ -8,26 +8,26 @@ const About = () => {
   const teamMembers = [
     {
       name: 'Varun Dubey',
-      role: 'Full Stack Developer',
-      bio: 'Passionate about technology and sustainability, combining AI with waste management.',
+      role: 'Machine Learning Engineer',
+      bio: 'B.Tech AI & ML student with solid experience in Deep Learning, Machine Learning & Data Science.',
       image: '/assets/team/varun.jpg',
     },
     {
       name: 'Deepanshu Sharma',
-      role: 'UI/UX Designer',
-      bio: 'Creating intuitive and accessible interfaces for a better user experience.',
+      role: 'Full Stack Developer',
+      bio: 'B.Tech AI & ML student with 1+ year of experience in web development, specializing in Full-Stack Development.',
       image: '/assets/team/deepanshu.jpg',
     },
     {
       name: 'Kunsh Sabbarwal',
-      role: 'Environmental Scientist',
-      bio: 'Expertise in waste management and sustainable practices.',
+      role: 'Machine Learning Engineer',
+      bio: 'Second-year Bachelor of Technology student passionate about Artificial Intelligence, Machine Learning and Data Science',
       image: '/assets/team/kunsh.jpg',
     },
     {
       name: 'Vasav Aggarwal',
-      role: 'Environmental Scientist',
-      bio: 'Expertise in waste management and sustainable practices.',
+      role: 'ML Engineer & API Specialist',
+      bio: 'Second-year AI-ML Student interested in Machine Learning & Data Science, along with API Exploration & Management.',
       image: '/assets/team/vasav.jpg',
     },
   ];
