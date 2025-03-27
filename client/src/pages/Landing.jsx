@@ -74,7 +74,7 @@ const Landing = () => {
       <section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600">
+            <h2 className="text-4xl font-extrabold text-black sm:text-5xl bg-clip-text ">
               How RIY Works
             </h2>
             <p className="mt-4 text-xl text-gray-600">
@@ -137,7 +137,7 @@ const Landing = () => {
       <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl font-extrabold sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600">
+            <h2 className="text-4xl font-extrabold sm:text-5xl bg-clip-text text-black">
               Creative DIY Recycling Ideas
             </h2>
             <p className="mt-4 text-xl text-gray-600">
