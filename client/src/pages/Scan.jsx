@@ -36,10 +36,11 @@ const Scan = () => {
   const processImageWithONNX = async (imageData) => {
     setIsLoading(true);
     try {
+      console.log('Starting image processing with ONNX...');
+      
       // Log the model loading attempt
       console.log('Attempting to load model from:', '/models/model.onnx');
       
-      // Create session with options and explicit error handling
       let session;
       try {
         session = await ort.InferenceSession.create(
@@ -56,32 +57,40 @@ const Scan = () => {
         throw new Error(`Failed to load model: ${modelError.message}`);
       }
 
-      // Log successful model loading
       console.log('Model loaded successfully');
+      console.log('Model metadata:', {
+        inputNames: session.inputNames,
+        outputNames: session.outputNames
+      });
 
       // Prepare the image for the model
+      console.log('Preparing image tensor...');
       const tensor = await prepareImageForModel(imageData);
       if (!tensor) {
         throw new Error('Failed to prepare image tensor');
       }
+      console.log('Image tensor prepared successfully:', {
+        shape: tensor.dims,
+        dataType: tensor.type
+      });
 
-      // Run inference with explicit input name checking
-      const inputNames = session.inputNames;
-      const outputNames = session.outputNames;
-      console.log('Model input names:', inputNames);
-      console.log('Model output names:', outputNames);
-
+      // Run inference
       const feeds = {};
-      feeds[inputNames[0]] = tensor;
-
-      const results = await session.run(feeds);
+      feeds[session.inputNames[0]] = tensor;
       
+      console.log('Running model inference...');
+      const results = await session.run(feeds);
+      console.log('Raw model output:', results);
+
       // Process the results
       const processedResults = processModelResults(results);
+      console.log('Processed results:', processedResults);
       
       setScanResults(processedResults);
       updateUserPoints(processedResults.userPoints);
       setScanStep('results');
+      
+      console.log('Image processing completed successfully');
     } catch (error) {
       console.error('Detailed error:', error);
       setError(`Failed to analyze the image: ${error.message}`);

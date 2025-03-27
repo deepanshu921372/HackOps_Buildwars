@@ -2,6 +2,10 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import aboutImage from '../assets/aboutImage.png';
+import varun from '../assets/team/varun.jpg';
+import deepanshu from '../assets/team/deepanshu.png';
+import kunsh from '../assets/team/kunsh.jpg';
+import vasav from '../assets/team/vasav.jpg';
 
 const About = () => {
   // Team members data
@@ -10,25 +14,25 @@ const About = () => {
       name: 'Varun Dubey',
       role: 'Machine Learning Engineer',
       bio: 'B.Tech AI & ML student with solid experience in Deep Learning, Machine Learning & Data Science.',
-      image: '/assets/team/varun.jpg',
+      image: varun,
     },
     {
       name: 'Deepanshu Sharma',
       role: 'Full Stack Developer',
       bio: 'B.Tech AI & ML student with 1+ year of experience in web development, specializing in Full-Stack Development.',
-      image: '/assets/team/deepanshu.jpg',
+      image: deepanshu,
     },
-    {
+    {   
       name: 'Kunsh Sabbarwal',
       role: 'Machine Learning Engineer',
       bio: 'Second-year Bachelor of Technology student passionate about Artificial Intelligence, Machine Learning and Data Science',
-      image: '/assets/team/kunsh.jpg',
+      image: kunsh,
     },
     {
       name: 'Vasav Aggarwal',
       role: 'ML Engineer & API Specialist',
       bio: 'Second-year AI-ML Student interested in Machine Learning & Data Science, along with API Exploration & Management.',
-      image: '/assets/team/vasav.jpg',
+      image: vasav,
     },
   ];
 
