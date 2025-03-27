@@ -100,7 +100,7 @@ const Signup = () => {
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-4xl font-bold text-green-800 mb-2">
-              Join EcoSort
+              Join RIY
             </h2>
             <div className="h-1 w-16 bg-green-500 mx-auto rounded-full mb-4"></div>
             <p className="mt-2 text-lg text-green-700">
@@ -297,7 +297,7 @@ const Signup = () => {
                   </div>
                   <div className="relative flex justify-center text-sm">
                     <span className="px-2 bg-white text-gray-500">
-                      Eco-friendly waste sorting since 2023
+                        Eco-friendly waste sorting since 2025
                     </span>
                   </div>
                 </div>

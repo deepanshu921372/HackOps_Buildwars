@@ -1,7 +1,7 @@
 // client/src/components/Footer.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import logo from '../assets/logo.png';
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-12">
@@ -10,11 +10,10 @@ const Footer = () => {
           <div className="mb-8 md:mb-0">
             <div className="flex items-center">
               <img
-                src="/assets/logo-white.svg"
-                alt="EcoSort Logo"
+                src={logo}
+                alt="RIY Logo"
                 className="h-8 w-auto"
               />
-              <span className="ml-2 text-xl font-bold">EcoSort</span>
             </div>
             <p className="mt-4 max-w-xs text-gray-400">
               Making waste segregation and recycling easy and accessible for everyone.
@@ -121,7 +120,7 @@ const Footer = () => {
         
         <div className="mt-12 border-t border-gray-700 pt-8">
           <p className="text-gray-400 text-sm text-center">
-            &copy; {new Date().getFullYear()} EcoSort. All rights reserved.
+            &copy; {new Date().getFullYear()} RIY. All rights reserved.
           </p>
         </div>
       </div>

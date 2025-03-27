@@ -44,7 +44,7 @@ const About = () => {
         <div className="bg-gradient-to-r from-green-600 to-emerald-500">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
             <div className="text-center">
-              <h1 className="text-5xl font-bold mb-6 text-white drop-shadow-lg">About EcoSort</h1>
+              <h1 className="text-5xl font-bold mb-6 text-white drop-shadow-lg">About RIY</h1>
               <p className="text-xl max-w-3xl mx-auto text-white/90">
                 We're on a mission to make waste segregation and recycling accessible, 
                 educational, and rewarding for everyone.
@@ -59,7 +59,7 @@ const About = () => {
             <div className="bg-white p-8 rounded-2xl shadow-xl">
               <h2 className="text-3xl font-bold text-green-800 mb-6">Our Mission</h2>
               <p className="text-lg text-gray-600 mb-4">
-                EcoSort aims to revolutionize how people manage waste by providing 
+                RIY aims to revolutionize how people manage waste by providing 
                 an easy-to-use platform that empowers individuals to make informed 
                 decisions about waste disposal.
               </p>
@@ -199,7 +199,7 @@ const About = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <span>info@ecosort.com</span>
+                    <span>info@RIY.com</span>
                   </li>
                   <li className="flex items-start">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -213,7 +213,7 @@ const About = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                     <span>
-                      EcoSort Headquarters<br />
+                      RIY Headquarters<br />
                       123 Green Street<br />
                       Eco City, 110001
                     </span>

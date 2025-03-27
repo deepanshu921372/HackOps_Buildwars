@@ -8,7 +8,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello! I'm your EcoSort assistant. How can I help you today?",
+      text: "Hello! I'm your RIY assistant. How can I help you today?",
       sender: 'bot',
     },
   ]);
@@ -225,7 +225,7 @@ const ChatBot = () => {
       {isOpen && (
         <div className="fixed bottom-24 right-6 w-full max-w-sm h-96 bg-white rounded-lg shadow-xl z-50 flex flex-col">
           <div className="p-4 bg-primary-500 text-white rounded-t-lg">
-            <h3 className="text-lg font-semibold">EcoSort Assistant</h3>
+            <h3 className="text-lg font-semibold">RIY Assistant</h3>
           </div>
 
           {showMap ? (

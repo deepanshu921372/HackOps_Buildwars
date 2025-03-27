@@ -6,6 +6,7 @@ import banner from '../assets/banner.png';
 import pot from '../assets/pot.png';
 import jar from '../assets/jar.png';
 import image from '../assets/image.png';
+import logo from '../assets/logo.png';
 
 const Landing = () => {
   // Sample DIY ideas
@@ -74,7 +75,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600">
-              How EcoSort Works
+              How RIY Works
             </h2>
             <p className="mt-4 text-xl text-gray-600">
               Simple steps to make waste management smarter and sustainable.
@@ -171,7 +172,7 @@ const Landing = () => {
               to="/signup"
               className="inline-block bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
             >
-              Join EcoSort to Discover More
+              Join RIY to Discover More
             </Link>
           </div>
         </div>
@@ -204,11 +205,10 @@ const Landing = () => {
             <div className="mb-8 md:mb-0">
               <div className="flex items-center">
                 <img
-                  src="/assets/logo-white.svg"
-                  alt="EcoSort Logo"
+                  src={logo}
+                  alt="RIY Logo"
                   className="h-8 w-auto"
                 />
-                <span className="ml-2 text-xl font-bold">EcoSort</span>
               </div>
               <p className="mt-4 max-w-xs text-gray-400">
                 Making waste segregation and recycling easy and accessible for everyone.
@@ -284,7 +284,7 @@ const Landing = () => {
           
           <div className="mt-16 border-t border-gray-800 pt-8">
             <p className="text-gray-400 text-sm text-center">
-              © {new Date().getFullYear()} EcoSort. All rights reserved.
+              © {new Date().getFullYear()} RIY. All rights reserved.
             </p>
           </div>
         </div>

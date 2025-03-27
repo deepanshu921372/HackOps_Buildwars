@@ -192,9 +192,9 @@ const Scan = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 py-8">
+      <div className="min-h-screen bg-green-50 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h1 className="text-3xl font-bold text-green-900 mb-8 text-center">
             Upload Waste Item
           </h1>
           
@@ -211,7 +211,7 @@ const Scan = () => {
                 <div className="mb-8">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-24 w-24 mx-auto text-primary-500"
+                    className="h-24 w-24 mx-auto text-green-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -224,13 +224,13 @@ const Scan = () => {
                     />
                   </svg>
                 </div>
-                <h2 className="text-2xl font-semibold mb-4">Upload an Image</h2>
-                <p className="text-gray-600 mb-8">
+                <h2 className="text-2xl font-semibold mb-4 text-green-800">Upload an Image</h2>
+                <p className="text-green-600 mb-8">
                   Select a clear image of your waste item for analysis
                 </p>
                 <button
                   onClick={() => fileInputRef.current.click()}
-                  className="btn-primary py-3 px-8"
+                  className="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-lg transition duration-150 ease-in-out"
                 >
                   Choose File
                 </button>
@@ -253,12 +253,12 @@ const Scan = () => {
                   <div className="md:w-2/3">
                     <div className="flex items-center justify-between mb-6">
                       <h2 className="text-2xl font-semibold">Scan Results</h2>
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
                         +{scanResults.pointsAwarded} points
                       </span>
                     </div>
                     
-                    <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                    <div className="bg-green-50 rounded-lg p-4 mb-6">
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <p className="text-sm text-gray-500">Item Name</p>
@@ -316,19 +316,19 @@ const Scan = () => {
                 <div className="mt-8 pt-4 border-t flex justify-between">
                   <button
                     onClick={handleClose}
-                    className="btn-outline"
+                    className="w-full border border-green-600 text-green-600 hover:bg-green-50 font-medium py-2 px-6 rounded-lg transition duration-150 ease-in-out"
                   >
                     Scan New Item
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => {
                       // In a real app, this would navigate to a detailed view or saved items
                       // alert('Item details saved!');
                     }}
-                    className="btn-primary"
+                    className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition duration-150 ease-in-out"
                   >
                     Save Details
-                  </button>
+                  </button> */}
                 </div>
               </div>
             )}
@@ -353,9 +353,9 @@ const Scan = () => {
             
             {isLoading && (
               <div className="p-12 text-center">
-                <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary-500 mb-6"></div>
-                <h3 className="text-xl font-medium mb-2">Analyzing your item...</h3>
-                <p className="text-gray-600">
+                <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-green-500 mb-6"></div>
+                <h3 className="text-xl font-medium mb-2 text-green-800">Analyzing your item...</h3>
+                <p className="text-green-600">
                   Please wait while our AI identifies the item and provides recycling information.
                 </p>
               </div>
