@@ -36,54 +36,40 @@ const Scan = () => {
   const processImageWithONNX = async (imageData) => {
     setIsLoading(true);
     try {
-      console.log('Starting image processing with ONNX...');
+      console.log('Starting image processing...');
       
-      // Log the model loading attempt
-      console.log('Attempting to load model from:', '/models/model.onnx');
-      
-      let session;
-      try {
-        session = await ort.InferenceSession.create(
-          '/models/model.onnx',
-          {
-            executionProviders: ['wasm'],
-            graphOptimizationLevel: 'all',
-            executionMode: 'sequential',
-            enableCpuMemArena: true
-          }
-        );
-      } catch (modelError) {
-        console.error('Model loading error:', modelError);
-        throw new Error(`Failed to load model: ${modelError.message}`);
-      }
+      // Create form data to send the image
+      const formData = new FormData();
+      // Convert base64 image data to blob
+      const blob = await fetch(imageData).then(r => r.blob());
+      formData.append('image', blob, 'image.jpg');
 
-      console.log('Model loaded successfully');
-      console.log('Model metadata:', {
-        inputNames: session.inputNames,
-        outputNames: session.outputNames
+      // Send image to backend API
+      const response = await fetch('http://localhost:5002/api/analyze-waste', {
+        method: 'POST',
+        body: formData,
       });
 
-      // Prepare the image for the model
-      console.log('Preparing image tensor...');
-      const tensor = await prepareImageForModel(imageData);
-      if (!tensor) {
-        throw new Error('Failed to prepare image tensor');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to analyze image');
       }
-      console.log('Image tensor prepared successfully:', {
-        shape: tensor.dims,
-        dataType: tensor.type
-      });
 
-      // Run inference
-      const feeds = {};
-      feeds[session.inputNames[0]] = tensor;
-      
-      console.log('Running model inference...');
-      const results = await session.run(feeds);
-      console.log('Raw model output:', results);
+      const results = await response.json();
+      console.log('Model results:', results);
 
       // Process the results
-      const processedResults = processModelResults(results);
+      const processedResults = {
+        name: results.detected_class,
+        category: results.category,
+        confidence: results.confidence,
+        isDIYUsable: results.is_diy_usable,
+        disposalInstructions: getDisposalInstructions(results.category),
+        diyIdeas: getDIYIdeas(results.category),
+        pointsAwarded: results.total_points,
+        userPoints: results.total_points + 100, // Base points + earned points
+      };
+
       console.log('Processed results:', processedResults);
       
       setScanResults(processedResults);
@@ -99,79 +85,16 @@ const Scan = () => {
     }
   };
   
-  // Helper function to prepare image for the model
-  const prepareImageForModel = async (imageData) => {
-    try {
-      // Create an HTML image element from the data URL
-      const img = new Image();
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
-        img.src = imageData;
-      });
-
-      // Create a canvas to resize and process the image
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      
-      // Set canvas size to model input size (640x640)
-      const modelWidth = 640;
-      const modelHeight = 640;
-      canvas.width = modelWidth;
-      canvas.height = modelHeight;
-
-      // Draw and resize image to canvas
-      // Use drawImage with 9 arguments to control scaling and positioning
-      ctx.drawImage(
-        img, 
-        0, 0, img.width, img.height,  // Source rectangle
-        0, 0, modelWidth, modelHeight // Destination rectangle
-      );
-      
-      // Get image data from canvas
-      const canvasImageData = ctx.getImageData(0, 0, modelWidth, modelHeight);
-      const data = canvasImageData.data;
-
-      // Prepare the input tensor
-      const inputArray = new Float32Array(modelWidth * modelHeight * 3);
-      
-      // Convert image data to normalized float32 array
-      for (let i = 0; i < data.length; i += 4) {
-        // Normalize RGB values with ImageNet normalization
-        // Mean: [0.485, 0.456, 0.406]
-        // Std: [0.229, 0.224, 0.225]
-        inputArray[i/4*3] = (data[i] / 255.0 - 0.485) / 0.229;     // R
-        inputArray[i/4*3+1] = (data[i+1] / 255.0 - 0.456) / 0.224; // G
-        inputArray[i/4*3+2] = (data[i+2] / 255.0 - 0.406) / 0.225; // B
-      }
-
-      // Create tensor with appropriate shape for your model
-      const tensor = new ort.Tensor(
-        'float32',
-        inputArray,
-        [1, 3, modelHeight, modelWidth]
-      );
-
-      return tensor;
-    } catch (error) {
-      console.error('Error preparing image:', error);
-      throw new Error(`Failed to prepare image: ${error.message}`);
-    }
-  };
-  
-  // Helper function to process model results
-  const processModelResults = (results) => {
-    // Process the model output according to your needs
-    // This is just an example structure
-    return {
-      name: 'Detected Item',
-      category: 'Detected Category',
-      isDIYUsable: true,
-      disposalInstructions: getDisposalInstructions('Detected Category'),
-      diyIdeas: getDIYIdeas('Detected Category'),
-      pointsAwarded: 5,
-      userPoints: 105,
+  // Helper function to calculate points based on category
+  const calculatePoints = (category) => {
+    const pointsMap = {
+      'Recyclable': 10,
+      'Biodegradable': 8,
+      'Hazardous': 5,
+      'Electronic': 7,
+      // Add more categories as needed
     };
+    return pointsMap[category] || 5;
   };
   
   // Helper function to get disposal instructions by category
@@ -346,6 +269,10 @@ const Scan = () => {
                           <p className="font-medium">{scanResults.category}</p>
                         </div>
                         <div>
+                          <p className="text-sm text-gray-500">Confidence</p>
+                          <p className="font-medium">{(scanResults.confidence * 100).toFixed(2)}%</p>
+                        </div>
+                        <div>
                           <p className="text-sm text-gray-500">DIY Usable</p>
                           <p className="font-medium">
                             {scanResults.isDIYUsable ? 'Yes' : 'No'}
@@ -396,7 +323,7 @@ const Scan = () => {
                   <button
                     onClick={() => {
                       // In a real app, this would navigate to a detailed view or saved items
-                      alert('Item details saved!');
+                      // alert('Item details saved!');
                     }}
                     className="btn-primary"
                   >
